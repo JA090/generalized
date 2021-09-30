@@ -1,1 +1,3 @@
-# generalized
+# generalized  
+A Shiny app chart of effect size vs. sample size allows approximate sample sizes to be read off for multiple tests. Given a minimum practically meaningful effect magnitude, potential tests of interest are superiority, inferiority, non-superiority, non-inferiority and equivalence (with respect to a range of effect sizes equivalent to zero). The chart simultaneously shows regions with user-nominated power for each of these tests at up to 3 user-nominated alpha levels.
+An option converts the chart to a generalized contour-enhanced funnel plot which displays study findings and a meta-analysis result against rejection regions for these tests. 
