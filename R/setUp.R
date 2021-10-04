@@ -5,11 +5,11 @@
 #' @param xmax Largest effect size to be displayed.
 #' @param ylow Smallest sample size to be displayed, if calculating sample size.
 #' @param yhigh Largest SE to be displayed on funnel plot (smallest is 0).
-#' @param Study Numeric. One group (value 0 or 1) or t?setUp
-#' wo group with value = relative size.
+#' @param Study Numeric. One group (value 0 or 1) or two group with value = relative size.
 #' @param var Anticipated variance in sample size calculation. Used with Study parameter to convert sample sizes to SE.
 #' @param DOF Degrees of freedom of t-test. If invalid will be set to default 38. Is re-set to 200 for funnel plot.
-#' @return Adjusted var, DOF, MMEM, power, xmax, ymax (SE) or nmin (sample size), qtb (t-quantile),ytick (tick mark positions on y-axis).
+#' @param plotCentre Centre of funnel plot (if selected)
+#' @return Adjusted var, DOF, MMEM, power, xmax, ymax (SE) or nmin (sample size), qtb (t-quantile),ytick (tick mark positions on y-axis),plotCentre (centre of plot).
 #' @description
 setup <- function(var,
                   DOF,
@@ -19,6 +19,7 @@ setup <- function(var,
                   yhigh,
                   ylow,
                   FunnelPlot,
+                  plotCentre,
                   Study) {
   #'First, set up technical parameters, giving feedback if input is invalid.
   if (FunnelPlot==F) {validate(need(var > 0, "Please enter a non-zero variance")) #' check variance is not zero
@@ -30,8 +31,14 @@ setup <- function(var,
   # If degrees of freedom of t-test not provided or invalid, set to default.
   #' Use large DOF to simulate normal distributions for meta-analysis display.
   if (DOF < 1) DOF = 38 }
-  else DOF=200
-
+  else DOF=500
+  # centre the plot about 0 unless specified for funnel plot
+  if (FunnelPlot==FALSE| is.na(plotCentre)==TRUE) plotCentre=0
+  validate(need(
+    xmax > plotCentre,
+    "Please enter a largest effect size to display that is greater than the effect size at the plot centre"
+  ))
+  xmax=xmax-plotCentre #'x co-ordinates are relative to center
   power <- as.numeric(power)
   if (FunnelPlot==T) power =0
   if (is.na(power) |
@@ -134,8 +141,9 @@ setup <- function(var,
   axis(
     side = 1,
     at = c(-xmax, -xmax / 2, 0, xmax / 2, xmax),
-    labels = round(c(-xmax, -xmax / 2, 0, xmax / 2, xmax),2)
+    labels = round(c(-xmax+plotCentre, .5*(-xmax+plotCentre ), plotCentre, .5*(xmax+plotCentre ), xmax+plotCentre),2)
   )
+
   #'  Put tick marks on top of chart at smallest effect magnitudes.
   axis(
     side = 3,
@@ -151,6 +159,7 @@ setup <- function(var,
     col = "black"
   )
  lines(c(xmax,xmax),c(ymax,0))
+ lines(c(-xmax,-xmax),c(ymax,0))
 
-  return(c(var, DOF, MMEM, power, xmax, ymax,  nmin, qtb,ytick))
+  return(c(var, DOF, MMEM, power, xmax, ymax,  nmin, qtb,plotCentre,ytick))
 }

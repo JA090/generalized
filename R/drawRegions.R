@@ -41,23 +41,26 @@ drawregions <-
     yy0 <-
       plotpoints(-xmax, ymax, -MMEM, confLevel[1], power, nn) #'inconclusive region
     zz0 <- plotpoints(xmax, ymax, -MMEM, confLevel[1], power, nn)
+    lines(c(0,0),c(0,min(ymax, MMEM / (qt(confLevel[1], nn) + qtb)))) #line to separate non-inferiority/non-superiority in equivalence region
 
     #' Draw polygons of inferiority and superiority regions.
     for (k in 1:3) {
       polygon(
         x = c(-MMEM, y[k, 1], -xmax, y[k + 1, 1]),
         y = c(0, y[k, 2], y[k, 2], y[k + 1, 2]),
-        col = colorvec[2 * k - 1]
+        col = colorvec[2 * k - 1],
+        border=NA
       ) #'inferiority
       polygon(
         x = c(MMEM, z[k, 1], xmax, z[k + 1, 1]),
         y = c(0, z[k, 2], z[k, 2], z[k + 1, 2]),
-        col = colorvec[2 * k]
+        col = colorvec[2 * k],border=NA
       ) #'superiority
     }
 
     #' Overlay inferiority regions with lines if chart is black & white and there is more than 1 alpha.
     dens = 5 #density of lines
+    lineth=1.2 #thickness of lines
     if (chartBW == T) {
       if (confLevel[2] != confLevel[3]) {
         polygon(
@@ -65,8 +68,8 @@ drawregions <-
           y = c(0, y[1, 2], y[1, 2], 0),
           density = dens,
           lty = 1,
-          lwd = .6,
-          angle = 45
+          lwd = lineth,
+          angle = 45,border=NA
         )
       }
     }
@@ -77,15 +80,15 @@ drawregions <-
       y = c(ymax, 0, 0, z[1, 2], ymax),
       density = dens,
       lty = 1,
-      lwd = .6,
+      lwd = lineth,
       angle = 45,
-      col = "black")
+      col = "black",border=NA)
 
     #' Draw inconclusive region.
     polygon(
       x = c(yy0[1], yy0[1], 0, zz0[1], zz0[1]),
       y = c(ymax, zz0[2],  min(ymax, MMEM / (qt(confLevel[1], nn) + qtb)), zz0[2], ymax),
-      col = colorvec[7]
+      col = colorvec[7],border=NA
     )
 
     #' Draw equivalence region at 3 levels; this is approximated by calculating the bound on SE at 41 points between the minimum meaningful magnitudes.
@@ -98,17 +101,17 @@ drawregions <-
       qtbx = x * 0
     for (k in 1:3) {
       y0 = (MMEM - abs(x)) / (qt(confLevel[k], nn) + qtbx)
-      polygon(x, y0, col = colcol[k])
+      polygon(x, y0, col = colcol[k],border=NA)
     }
     # distinguish equivalence regions with bars in black and white chart
     if (chartBW == TRUE)
         #((confLevel[3] == confLevel[2]) == FALSE))
       polygon(
         x,
-        (MMEM - abs(x)) / (qt(confLevel[2], nn) + qtbx),
+        (MMEM - abs(x)) / (qt(confLevel[1], nn) + qtbx),
         density = 10,
-        lwd = .6,
-        angle = 180
+        lwd = lineth,
+        angle = 180,border=NA
       )
 
     #' Draw horizontal grid lines on top of everything else.

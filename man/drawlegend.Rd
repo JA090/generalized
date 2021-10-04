@@ -18,7 +18,7 @@ drawlegend(confLevel, MMEM, chartBW, xmax, ymax)
 \item{ymax}{Extent of y-axis is 0 to ymax, in units of SE. Used to position legend.}
 }
 \value{
-Vector of colors, either for color or b&w version. These cannot currently be changed by the user.
+Vector of colors (gray levels for b&w version). These cannot currently be changed by the user.
 }
 \description{
 Start by setting up labels describing test levels.

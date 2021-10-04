@@ -14,7 +14,8 @@ datadisplay(
   nn,
   ymax,
   FunnelPlot,
-  re
+  re,
+  plotCentre
 )
 }
 \arguments{
@@ -24,10 +25,7 @@ datadisplay(
 
 \item{datameanSS}{Anticipated effect sizes. Comma-separated text.  Used if FunnelPlot is FALSE.}
 
-\item{dataVar}{Comma-separated text of study variances. Used if FunnelPlot is TRUE.
-
-Calculate SE from variance and sample size according to study design.
-Plot vertical lines at effect sizes for sample size calculator option.}
+\item{dataVar}{Comma-separated text of study variances. Used if FunnelPlot is TRUE.}
 
 \item{chartBW}{TRUE if b&w chart requested.}
 
@@ -40,8 +38,15 @@ Plot vertical lines at effect sizes for sample size calculator option.}
 \item{FunnelPlot}{TRUE if a generalized funnel plot requested.}
 
 \item{re}{TRUE if random-effects model requested for meta-analysis.}
+
+\item{plotCentre}{Centre of plot. Used if FunnelPlot is TRUE.}
 }
 \description{
 When computing sample sizes, vertical lines are drawn through anticipated effect sizes on a chart of effect size vs. sample size.
 If computing a generalized funnel plot, study data are plotted as points, along with the meta-analysis result, on a chart of effect size vs SE.
+
+Calculate SE from variance and sample size according to study design.
+Plot vertical lines at effect sizes for sample size calculator option.
+For funnel pot, plot points on chart of effect size vs SE. -shift to centre plot
+Then use CRAN metafor package to compute appropriate meta-analysis model and plot this with a cross symbol.
 }

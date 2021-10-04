@@ -2,7 +2,7 @@
 % Please edit documentation in R/alphas.R
 \name{alphas}
 \alias{alphas}
-\title{Function to organise user-entered alpha levels.}
+\title{Function to organize user-entered alpha levels.}
 \usage{
 alphas(a0, a1, a2)
 }

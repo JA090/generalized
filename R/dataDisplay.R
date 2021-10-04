@@ -13,6 +13,7 @@
 #' @param re TRUE if random-effects model requested for meta-analysis.
 #' @param datameanF Comma-separated text of study effect sizes. Used if FunnelPlot is TRUE.
 #' @param dataVar Comma-separated text of study variances. Used if FunnelPlot is TRUE.
+#' @param plotCentre Centre of plot. Used if FunnelPlot is TRUE.
 #' @description
 datadisplay <- function(study,
                         datameanF,
@@ -23,14 +24,15 @@ datadisplay <- function(study,
                         nn,
                         ymax,
                         FunnelPlot,
-                        re)
+                        re,
+                        plotCentre)
 {
   ptcol = "black"
   if (chartBW == FALSE)
     ptcol = "black"
    if (FunnelPlot==T)datamean=datameanF
     else datamean=datameanSS
-  mean = as.numeric(unlist(strsplit(datamean, split = ","))) #user-entered effect sizes (or effect size/SE pairs) to display
+  mean = as.numeric(unlist(strsplit(datamean, split = ",")))  #user-entered effect sizes (or effect size/SE pairs) to display
   Var = as.numeric(unlist(strsplit(dataVar, split = ","))) #user-entered effect sizes (or effect size/SE pairs) to display
 
   #' Calculate SE from variance and sample size according to study design.
@@ -53,9 +55,9 @@ datadisplay <- function(study,
       )
   }
   else
-    #' For funnel pot, plot points on chart of effect size vs SE.
+    #' For funnel pot, plot points on chart of effect size vs SE. -shift to centre plot
     for (i in 1:(length(mean) )) {
-      m = mean[i]
+      m = mean[i]-plotCentre
       SE = sqrt(Var[i])
       points(m,
              SE,
@@ -67,6 +69,6 @@ datadisplay <- function(study,
  if (FunnelPlot ==T) {if (re==T) Model="ML"
     else Model="FE"
     res<-rma.uni(yi=mean,vi=Var,method=Model)
-    points(res$beta,res$se,pch=4,cex=1.5,lwd=2, col=ptcol)}
+    points(res$beta-plotCentre,res$se,pch=4,cex=1.5,lwd=2, col=ptcol)}
 
 }

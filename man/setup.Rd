@@ -4,12 +4,12 @@
 \alias{setup}
 \title{FUNCTION to set up parameters used in function genSSsize, and to draw empty plot.}
 \usage{
-setup(var, nn, MMEM, power, xmax, yhigh, ylow, FunnelPlot, Study)
+setup(var, DOF, MMEM, power, xmax, yhigh, ylow, FunnelPlot, plotCentre, Study)
 }
 \arguments{
 \item{var}{Anticipated variance in sample size calculation. Used with Study parameter to convert sample sizes to SE.}
 
-\item{nn}{DOF of t-test. If invalid will be set to default 38. Is re-set to 200 for funnel plot.}
+\item{DOF}{Degrees of freedom of t-test. If invalid will be set to default 38. Is re-set to 200 for funnel plot.}
 
 \item{MMEM}{Minimum meaningful effect magnitude.}
 
@@ -23,11 +23,12 @@ setup(var, nn, MMEM, power, xmax, yhigh, ylow, FunnelPlot, Study)
 
 \item{FunnelPlot}{TRUE if a generalized funnel plot is requested.}
 
-\item{Study}{Numeric. One group (value 0 or 1) or t?setUp
-wo group with value = relative size.}
+\item{plotCentre}{Centre of funnel plot (if selected)}
+
+\item{Study}{Numeric. One group (value 0 or 1) or two group with value = relative size.}
 }
 \value{
-Adjusted var, nn, MMEM, power, xmax, ymax (SE) or nmin (sample size), qtb (t-quantile),ytick (tick mark positions on y-axis).
+Adjusted var, DOF, MMEM, power, xmax, ymax (SE) or nmin (sample size), qtb (t-quantile),ytick (tick mark positions on y-axis),plotCentre (centre of plot).
 }
 \description{
 First, set up technical parameters, giving feedback if input is invalid.

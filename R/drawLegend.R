@@ -38,12 +38,13 @@ drawlegend <- function(confLevel, MMEM, chartBW, xmax, ymax)
   # Set colours for inferiority/superiority regions (at present these are not user-specified).
 
   if (chartBW == FALSE) {
-    colcol = c("aquamarine1",
-               "olivedrab1",
-               "aquamarine3",
-               "olivedrab3",
-               "aquamarine4",
-               "olivedrab4")
+    colcol = c("lightblue",
+               "darkseagreen1",
+               "blue",
+               "chartreuse",
+               "darkblue",
+               "darkgreen"
+   )
     j = 0
     colorvec <- colcol
   }
@@ -60,6 +61,7 @@ drawlegend <- function(confLevel, MMEM, chartBW, xmax, ymax)
     colorvec = c(rep(c(colcol[1], colcol[2 - j]), times = 2), colorvec[5], colorvec[6])
 
   legSize = 1.1 #set legend size
+
 
   if (alpha[1] == alpha[2])
     kstart = 3
