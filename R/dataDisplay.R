@@ -5,10 +5,10 @@
 #' @param ymax SE corresponding to smallest sample size to be shown on chart.
 #' @param chartBW TRUE if b&w chart requested.
 # For sample size calculation.
-#' @param study Numeric. One or two group with relative size.
+#' @param study Numeric. One or two group with relative size of larger group, or correlation (study= 0).
 #' @param datameanSS Anticipated effect sizes. Comma-separated text.  Used if FunnelPlot is FALSE.
-#' @param var Anticipated variance. Used if FunnelPlot is FALSE.
-#' @param nn DOF of t-test.
+#' @param var Anticipated variance. Used if FunnelPlot is FALSE and study > 0.
+
 # For funnel plot.
 #' @param re TRUE if random-effects model requested for meta-analysis.
 #' @param datameanF Comma-separated text of study effect sizes. Used if FunnelPlot is TRUE.
@@ -33,13 +33,11 @@ datadisplay <- function(study,
    if (FunnelPlot==T)datamean=datameanF
     else datamean=datameanSS
   mean = as.numeric(unlist(strsplit(datamean, split = ",")))  #user-entered effect sizes (or effect size/SE pairs) to display
+  if (study==0) mean = 0.5*log((1+mean)/(1-mean)) #' For correlation, apply Fisher's transformation to user-entered data.
+
   Var = as.numeric(unlist(strsplit(dataVar, split = ","))) #user-entered effect sizes (or effect size/SE pairs) to display
 
-  #' Calculate SE from variance and sample size according to study design.
-  if (study == 0 | study == 1)
-    SE = sqrt(var / (nn + 2))
-  else
-    SE = sqrt(var * (1 / study + 1 / (1 - study)) / (nn + 2))
+
 
   #' Plot vertical lines at effect sizes for sample size calculator option.
 
@@ -55,7 +53,7 @@ datadisplay <- function(study,
       )
   }
   else
-    #' For funnel pot, plot points on chart of effect size vs SE. -shift to centre plot
+    #' For funnel plot, plot points on chart of effect size vs SE. -shift to centre plot
     for (i in 1:(length(mean) )) {
       m = mean[i]-plotCentre
       SE = sqrt(Var[i])

@@ -9,7 +9,7 @@
 #'
 plotpoints <- function(xm, ym, MMEM, conf, power, nn)
 {
-  if ((is.na(power) == TRUE) | power < 0.0001)
+    if ((is.na(power) == TRUE) | power < 0.0001)
     qtb = 0
   else
     qtb = qt(power, nn)

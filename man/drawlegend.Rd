@@ -9,7 +9,7 @@ drawlegend(confLevel, MMEM, chartBW, xmax, ymax)
 \arguments{
 \item{confLevel}{Numeric 3-component vector of confidence levels with possible repeat values.}
 
-\item{MMEM}{Minimum meaningful effect magnitude.}
+\item{MMEM}{Minimum meaningful effect magnitude (after Fisher transformation in case of correlation).}
 
 \item{chartBW}{TRUE if b&w chart is to be drawn.}
 
@@ -24,7 +24,6 @@ Vector of colors (gray levels for b&w version). These cannot currently be change
 Start by setting up labels describing test levels.
 Then set up labels to describe the tests; these differ if there is a minimum meaningful effect (MMEM>0).
 Set colours and angles for regions according to whether black and white option selected and how many alpha levels.
-Alter legend according to how many alpha levels are being used.
 If meaningful effects >0 there will be equivalence regions in the legend.
 With minimum meaningful effects, there are non-superior and non-inferior regions as well as an inconclusive region.
 }

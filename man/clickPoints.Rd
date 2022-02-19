@@ -9,7 +9,7 @@ clickPoints(FunnelPlot, Study, var, xhit, yhit)
 \arguments{
 \item{FunnelPlot}{TRUE if generalized funnel plot requested.}
 
-\item{Study}{Type of study (one or two group).}
+\item{Study}{Type of study (one (value 1) or two group or correlation (value 0)).}
 
 \item{var}{Anticipated variance in sample size calculation.}
 

@@ -4,13 +4,13 @@
 #' Details of the computation are in Aisbett, Drinkwater, Quarrie and Woodcock.
 #' @param confLevel Numeric 3-component vector of confidence levels with possible repeat values.
 #' @param power Desired power in sample size calculation.
-#' @param MMEM Minimum meaningful effect magnitude.
+#' @param MMEM Minimum meaningful effect magnitude (after Fisher transformation in case of correlation).
 #' @param chartBW TRUE if b&w chart.
 #' @param xmax Extent of x-axis is -xmax to xmax.
 #' @param ymax Extent of y-axis is ymax in units of SE.
 #' @param ytick Vector of y-axis values at which tick marks are to be placed.
 #' @param colorvec Vector of colors either for color or b&w version, as set in function drawlegend.
-#' @param nn DOF for t-tests, as set in function setup.
+#' @param nn DOF for t-tests.
 #' @param qtb Quantile from t-test including power.
 #' @description
 
@@ -60,9 +60,10 @@ drawregions <-
 
     #' Overlay inferiority regions with lines if chart is black & white and there is more than 1 alpha.
     dens = 5 #density of lines
-    lineth=1.2 #thickness of lines
+    lineth=.8 #thickness of lines
     if (chartBW == T) {
-      if (confLevel[2] != confLevel[3]) {
+     # if (confLevel[2] != confLevel[3])
+      {
         polygon(
           x = c(-MMEM, y[1, 1], -xmax, -xmax),
           y = c(0, y[1, 2], y[1, 2], 0),

@@ -7,15 +7,15 @@
 setup(var, DOF, MMEM, power, xmax, yhigh, ylow, FunnelPlot, plotCentre, Study)
 }
 \arguments{
-\item{var}{Anticipated variance in sample size calculation. Used with Study parameter to convert sample sizes to SE.}
+\item{var}{Anticipated variance in sample size calculation. Used with Study parameter to convert sample sizes to SE in t-tests.}
 
-\item{DOF}{Degrees of freedom of t-test. If invalid will be set to default 38. Is re-set to 200 for funnel plot.}
+\item{DOF}{Degrees of freedom of t-test. If zero then testing a correlation and is reset to 500. If invalid will be set to default 38. Is re-set to 500 for funnel plot.}
 
-\item{MMEM}{Minimum meaningful effect magnitude.}
+\item{MMEM}{Minimum meaningful effect magnitude or minimum meaningful correlation magnitude.}
 
 \item{power}{Desired power in sample size calculation. Is re-set to 0 for funnel plot.}
 
-\item{xmax}{Largest effect size to be displayed.}
+\item{xmax}{Largest effect size to be displayed; forced to be less than 1 if doing correlation}
 
 \item{yhigh}{Largest SE to be displayed on funnel plot (smallest is 0).}
 
@@ -25,14 +25,15 @@ setup(var, DOF, MMEM, power, xmax, yhigh, ylow, FunnelPlot, plotCentre, Study)
 
 \item{plotCentre}{Centre of funnel plot (if selected)}
 
-\item{Study}{Numeric. One group (value 0 or 1) or two group with value = relative size.}
+\item{Study}{Numeric. Pearson's correlation (value 0). One group (value 1). Two group with value between 0 and 1 = relative size.}
 }
 \value{
-Adjusted var, DOF, MMEM, power, xmax, ymax (SE) or nmin (sample size), qtb (t-quantile),ytick (tick mark positions on y-axis),plotCentre (centre of plot).
+Adjusted var, DOF, MMEM, power, xmax, ymax (SE) or nmin (sample size), qtb (t-quantile),ytick (tick mark positions on y-axis),plotCentre (centre of plot), Corr (0 unless Correlation).
 }
 \description{
 First, set up technical parameters, giving feedback if input is invalid.
-Use large DOF to simulate normal distributions for meta-analysis display.
+Use large DOF to simulate normal distributions for  correlations and meta-analysis display.
+For a correlation, apply Fisher's transformation to minimum meaningful and to x-axis ranges.
 Then set up visual display parameters.
 y-axis will be in units of SE or sample size, from a nominated value to 0 or infinity respectively.
 Labels for y axis will be total sample size unless generalized funnel plot requested.

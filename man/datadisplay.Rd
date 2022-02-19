@@ -19,7 +19,7 @@ datadisplay(
 )
 }
 \arguments{
-\item{study}{Numeric. One or two group with relative size.}
+\item{study}{Numeric. One or two group with relative size of larger group, or correlation (study= 0).}
 
 \item{datameanF}{Comma-separated text of study effect sizes. Used if FunnelPlot is TRUE.}
 
@@ -29,9 +29,7 @@ datadisplay(
 
 \item{chartBW}{TRUE if b&w chart requested.}
 
-\item{var}{Anticipated variance. Used if FunnelPlot is FALSE.}
-
-\item{nn}{DOF of t-test.}
+\item{var}{Anticipated variance. Used if FunnelPlot is FALSE and study > 0.}
 
 \item{ymax}{SE corresponding to smallest sample size to be shown on chart.}
 
@@ -45,8 +43,7 @@ datadisplay(
 When computing sample sizes, vertical lines are drawn through anticipated effect sizes on a chart of effect size vs. sample size.
 If computing a generalized funnel plot, study data are plotted as points, along with the meta-analysis result, on a chart of effect size vs SE.
 
-Calculate SE from variance and sample size according to study design.
 Plot vertical lines at effect sizes for sample size calculator option.
-For funnel pot, plot points on chart of effect size vs SE. -shift to centre plot
+For funnel plot, plot points on chart of effect size vs SE. -shift to centre plot
 Then use CRAN metafor package to compute appropriate meta-analysis model and plot this with a cross symbol.
 }

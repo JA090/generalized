@@ -1,0 +1,14 @@
+name: genSSize
+title: genSSize
+username:
+account: meraglim
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5681518
+bundleId: 5592441
+url: https://meraglim.shinyapps.io/genSSize/
+when: 1645156983.13311
+lastSyncTime: 1645156983.13311
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rbuildignore|appReal.R|data/Cowlishaw.txt|data/Cowlishaw2.txt|data/Grgic.txt|DESCRIPTION|genSSize.R|NAMESPACE|man|R

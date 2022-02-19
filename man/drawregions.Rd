@@ -22,7 +22,7 @@ drawregions(
 
 \item{power}{Desired power in sample size calculation.}
 
-\item{MMEM}{Minimum meaningful effect magnitude.}
+\item{MMEM}{Minimum meaningful effect magnitude (after Fisher transformation in case of correlation).}
 
 \item{xmax}{Extent of x-axis is -xmax to xmax.}
 
@@ -30,7 +30,7 @@ drawregions(
 
 \item{ytick}{Vector of y-axis values at which tick marks are to be placed.}
 
-\item{nn}{DOF for t-tests, as set in function setup.}
+\item{nn}{DOF for t-tests.}
 
 \item{colorvec}{Vector of colors either for color or b&w version, as set in function drawlegend.}
 
